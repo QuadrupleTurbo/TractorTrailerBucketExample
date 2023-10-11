@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+      <TargetFramework>netstandard2.0</TargetFramework>
+      <DebugType>portable</DebugType>
+      <TargetName>$(AssemblyName).net</TargetName>
+      <DefineConstants>SERVER</DefineConstants>
+      <RunPostBuildEvent>Always</RunPostBuildEvent>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+      <PackageOutputPath>\$(OutputPath)</PackageOutputPath>
+      <IsPublishable>False</IsPublishable>
+    </PropertyGroup>
+  
+    <ItemGroup>
+      <PackageReference Include="CitizenFX.Core.Server" Version="1.0.6335" />  
+    </ItemGroup>
+  
+    <ItemGroup>
+      <Reference Include="FxEvents.Server">
+        <HintPath>..\Dependencies\Server\FxEvents.Server.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+  
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+      <Exec Command="$(SolutionDir)build.bat &quot;$(TargetDir)$(TargetFileName)&quot; &quot;Server&quot;" />
+    </Target>
+</Project>
+  

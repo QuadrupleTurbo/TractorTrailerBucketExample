@@ -1,0 +1,17 @@
+﻿<Project Sdk="CitizenFX.Sdk.Client/0.2.3">
+    <PropertyGroup>
+      <RunPostBuildEvent>Always</RunPostBuildEvent>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </PropertyGroup>
+    <ItemGroup>
+      <Reference Include="FxEvents.Client">
+        <HintPath>..\Dependencies\Client\FxEvents.Client.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Update="CitizenFX.Core.Client" Version="1.0.6798" />
+    </ItemGroup>
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+      <Exec Command="$(SolutionDir)build.bat &quot;$(TargetDir)$(TargetFileName)&quot; &quot;Client&quot;" />
+    </Target>
+</Project>
